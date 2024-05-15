@@ -1,7 +1,11 @@
 class Character{
-    #count
-    constructor(setSrc){
+    #count;
+    #status;
+    constructor(setSrc, life){
         this.array = setSrc;
+        this.lifeMax = life;
+        this.#status = true;
+        this.currentLife = this.lifeMax;
         this.imageN = [];
         this.imageW = [];
         this.imageA = [];
@@ -71,5 +75,27 @@ class Character{
                 this.imageD.push(img);
             }
         })
+    }
+    winLife(mount){
+        if(this.#status === false){
+            return console.log("Estoy muerto");
+        }
+        this.currentLife += mount;
+        if(this.currentLife >= this.lifeMax){
+            this.currentLife = this.lifeMax;
+        }
+        return console.log(this.currentLife);
+    }
+
+    loseLife(mount){
+        if(this.#status === false){
+            return console.log("Estoy muerto");
+        }
+        this.currentLife -= mount;
+        if(this.currentLife <= 0){
+            this.currentLife = 0;
+            this.#status = false;
+        }
+        return console.log(this.currentLife);
     }
 }

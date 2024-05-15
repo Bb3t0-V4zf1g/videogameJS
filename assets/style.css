@@ -5,11 +5,39 @@
     }
     
     body{
-    background-image: linear-gradient(to left, rgb(49, 185, 222),rgb(38, 126, 155),rgb(16, 159,
-    126),rgb(39, 216, 122));
+        background-color: #cccc;
+    }
+    
+    #content{
+        height: 600px;
     }
 
-    canvas{
-        margin: 0 auto;
-        background-color: aqua
+    canvas {
+        width: 100%; 
+        height: auto; 
+        border: 1px solid #000; 
+    }
+
+    #top nav > ul{
+        list-style: none;
+    }
+
+    main{
+        background-image: linear-gradient(to left, rgb(49, 185, 222),rgb(38, 126, 155),rgb(16, 159,
+        126),rgb(39, 216, 122));
+    }
+
+    @media screen and (min-width: 992px) {
+        canvas{
+            height: 530px;
+            width: 700px;
+        }
+        
+    }
+    @media screen and (max-width: 768px) {
+        canvas{
+            max-height: 350px;
+            max-width: 470px;
+        }
+        
     }

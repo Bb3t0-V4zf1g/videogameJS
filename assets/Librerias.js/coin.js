@@ -6,8 +6,8 @@ class Coin{
     #change;
     #points;
     constructor(widthCont, heightCont){
-        this.IncrementoX = Math.floor(Math.random()*11)+10;
-        this.IncrementoY = Math.floor(Math.random()*11)+10;
+        this.IncrementoX = Math.floor(Math.random()*21)+10;
+        this.IncrementoY = Math.floor(Math.random()*21)+10;
         this.#ActualImg = "";//Validar colisiones y bordes
         this.imgs = [
             "assets/imgMoneda/coin1.png",
@@ -29,7 +29,8 @@ class Coin{
         this.PosicionX = Math.floor(Math.random()*(widthCont-this.imgsWithSrc[0].width));
         this.PosicionY = Math.floor(Math.random()*(heightCont-this.imgsWithSrc[0].height));
         this.#change = 0;
-        this.#points = 0;
+        this.#points = (this.IncrementoX + this.IncrementoY)/2;
+        //Depende de la velocidad, vale mas
     }
     Avanzar(anchoContenedor, alturaContenedor){
         this.PosicionX += this.IncrementoX;

@@ -138,4 +138,10 @@ class Sword{
     get getActualImg(){
         return this.#ActualImg;
     }
+    set setDireccion(dir){
+        this.#Direccion = dir;
+    }
+    get getDireccion(){
+        return this.#Direccion;
+    }
 }

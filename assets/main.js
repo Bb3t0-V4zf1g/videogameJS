@@ -8,19 +8,21 @@ var canvas = document.getElementById('pizarron');
 var ctx = canvas.getContext('2d');
 
 //Cargar personaje;
+//Imagenes para animacion personaje
 let array =["assets/imgPersonaje/zeldaN.png", "assets/imgPersonaje/zeldaS1.png", "assets/imgPersonaje/zeldaS2.png",  "assets/imgPersonaje/zeldaS3.png",  "assets/imgPersonaje/zeldaS4.png",  "assets/imgPersonaje/zeldaS1.1.png", "assets/imgPersonaje/zeldaS2.1.png", "assets/imgPersonaje/zeldaS3.1.png", "assets/imgPersonaje/zeldaW1.png", "assets/imgPersonaje/zeldaW2.png",  "assets/imgPersonaje/zeldaW3.png",  "assets/imgPersonaje/zeldaW4.png",  "assets/imgPersonaje/zeldaW1.1.png", "assets/imgPersonaje/zeldaW2.1.png", "assets/imgPersonaje/zeldaW3.1.png", "assets/imgPersonaje/zeldaA1.png", "assets/imgPersonaje/zeldaA2.png",  "assets/imgPersonaje/zeldaA3.png",  "assets/imgPersonaje/zeldaA4.png",  "assets/imgPersonaje/zeldaA1.1.png", "assets/imgPersonaje/zeldaA2.1.png", "assets/imgPersonaje/zeldaA3.1.png", "assets/imgPersonaje/zeldaD1.png", "assets/imgPersonaje/zeldaD2.png",  "assets/imgPersonaje/zeldaD3.png",  "assets/imgPersonaje/zeldaD4.png",  "assets/imgPersonaje/zeldaD1.1.png", "assets/imgPersonaje/zeldaD2.1.png", "assets/imgPersonaje/zeldaD3.1.png"]
-const personaje = new Character(array);
-//cargar pelota
-const pelota = new Pelota("assets/imgPersonaje/pelota.png", 5, 5);
+const personaje = new Character(array, 500);
+
 //Cargar espada
 const espada1 = new Sword(600,200, 10);
 //Cargar moneda
 const moneda1 = new Coin(canvas.width, canvas.height);
-const moneda3 = new Coin(canvas.width, canvas.height);
-const moneda2 = new Coin(canvas.width, canvas.height);
+;
 
 function inicio(){
-        setInterval(animacion,30);
+        // let startCount = setInterval(()=>{
+        //     setTimeout(console.log(1))}
+        //     ,1000);
+        let startGame = setInterval(animacion,30);
 }
 
 //Variables globales fuera del intervalo porque si no se reinician.
@@ -34,33 +36,49 @@ function animacion() {
     posY+=moveY;
     // Limpieza del canvas y otras modificaciones
     ctx.clearRect(0,0, canvas.width, canvas.height);
-    //Mover pelota
-    pelota.avanza(canvas.width, canvas.height);
+
     //Mover espada
     espada1.Avanzar(canvas.width, canvas.height);
+
     //Mover momeda
     moneda1.Avanzar(canvas.width, canvas.height);
-    moneda2.Avanzar(canvas.width, canvas.height);
-    moneda3.Avanzar(canvas.width, canvas.height);
+
+    let colorFS;
 
     // Lógica de colisiones y validaciones
-    let colorFS = colision(personaje, posX, posY, pelota) ? "red" : "blue";
     toMove(canvas.width, canvas.height);
+
+    //Colision con moneda, gana vida
+    if(colision2(personaje, posX, posY, moneda1)){
+        console.log("vida");
+        console.log(moneda1.getPoints);
+        personaje.winLife(moneda1.getPoints);
+        colorFS = "green";
+        console.log(`Recuperacion, ahora tengo: ${personaje.currentLife}`);
+    }else{
+        colorFS ="#000";
+    }
+    //Colision con espada, pierde vida
+    if(colision2(personaje, posX, posY, espada1)){
+        console.log("daño");
+        personaje.loseLife(20);
+        colorFS = "red";
+        console.log(`Daño, ahora tengo: ${personaje.currentLife}`);
+    }else{
+        colorFS = "#000";
+    }
+
 
     // Pintar el canvas
     canvas.style.background = colorFS;
     //Pintar personaje
     personaje.pintaLados(ctx, posX, posY,moveX, moveY);
-    //Pintar pelota
-    pelota.pinta(ctx);
+
     //Pintar espada
     espada1.Dibujar(ctx);
+
     //Pintar moneda
     moneda1.Dibujar(ctx);
-    moneda2.Dibujar(ctx);
-    moneda3.Dibujar(ctx);
-
-
 }
 
 //tecla presionada
@@ -145,10 +163,11 @@ function colision(obj1, obj1PX, obj1PY, obj2){
     }
 }
 
+//Funcion derectar colision
 function colision2(obj1, obj1PX, obj1PY, obj2){
     let imgObj2 = obj2.getActualImg;
     if(obj1PX < obj2.PosicionX + imgObj2.width &&
-    obj1PX + obj1.currentImg.width > obj2.PosicionX && obj1.PosicionY < obj2.PosicionY +  imgObj2.height &&
+    obj1PX + obj1.currentImg.width > obj2.PosicionX && obj1PY < obj2.PosicionY +  imgObj2.height &&
     obj1PY + obj1.currentImg.height > obj2.PosicionY
     ){
         return true;

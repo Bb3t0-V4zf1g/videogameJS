@@ -4,18 +4,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project</title>
+    <link rel="stylesheet" href="bootstrap/bootstrap-5.3.3-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/style.css"><!--Estilos css-->
-    <script src="assets/Librerias.js/pelota.js"></script><!--Framework class Pelota-->
-    <script src="assets/Librerias.js/personaje.js"></script>
-    <script src="assets/Librerias.js/coin.js"></script>
-    <script src="assets/Librerias.js/bolaFuego.js"></script>
-    <script src="assets/Librerias.js/sword.js"></script>
+    <script src="assets/Librerias.js/personaje.js"></script><!--Libreria Personaje-->
+    <script src="assets/Librerias.js/coin.js"></script><!--Libreria Moneda-->
+    <script src="assets/Librerias.js/sword.js"></script><!--Libreria Espada-->
 </head>
 <body onload="inicio()">
     <!--Lienzo para dibujar personaje y objeto a provocar colisiones-->
-    <canvas id="pizarron" width="800" height="600" style="border:1px solid #000; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></canvas>
+    <div id="layout">
+        <div class="container my-5 mx-auto" >
+            <div id="top" class="row col-12">
+                <header class="col-12 col-md-4 bg-secondary text-white border">
+                    <h1 class="text-center">Minigame</h1>
+                </header>
+                <nav class="col-12 col-md-8 bg-secondary text-white border">
+                    <ul class="row text-center py-2">
+                        <li class="col">Easy</li>
+                        <li class="col">Medium</li>
+                        <li class="col">Hard</li>
+                        <li class="col">Extreme</li>
+                    </ul>
+                </nav>
+            </div>
+            <div id="content" class="row col-12 h-40">
+                <aside class="col-12 border col-md-2 justify-content-center py-3 bg-primary">
+                    <h4 class="col-12 text-center display-6">Rules!</h4>
+                    <p>
+                        Intenta no tocar la espada
+                    </p>
+                    <p>
+                        Colecciona monedas para obtener mas puntos
+                    </p>
+                    <p>
+                        El puntuaje se calculará como "monedas por minuto"
+                    </p>
+                </aside>           
+                <main class="col-12 col-md-10 border justify-content-center align-items-center">
+                    <section class="row">
+                        <article class="row col-12 text-center mx-auto">
+                            <h1 class="col-2">Barra</h1>
+                            <div class="border col-9 offset-1"></div>
+                        </article>
+                        <article class="col-12 text-center">
+                            <canvas id="pizarron" width="510" height="400"></canvas>
+                        </article>
+                    </section>
+                </main>
+            </div>
+            <div id="footer" class="row col-12 border bg-primary">
+                <footer class="text-center py-3">
+                    <h3>Alberto Vazquez Figueroa &copy; </h3>
+                </footer>
+            </div>
 
-    <div class="prueba"></div>
+        </div>
+    </div>
+
+    <script src="jquery/jquery-3.7.1.js"></script>
+    <script src="bootstrap/bootstrap-5.3.3-dist/js/bootstrap.min.js"></script>
 <script src="assets/main.js"></script><!--JS principal-->  
 </body>
 </html>
